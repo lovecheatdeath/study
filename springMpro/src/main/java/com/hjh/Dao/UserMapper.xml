@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper标签要指定namespace属性，不然会报错，且mapper开发时设置为Mapper接口的全限定名-->
+<mapper namespace="com.hjh.Dao.UserMapper">
+    <!--<select id="findUserById" parameterType="int" resultType="com.hjh.entity.User">-->
+        <!--select * from task where id = #{id}-->
+    <!--</select>-->
+    <select id="queryAll" resultType="com.hjh.entity.User">
+        select * from task
+    </select>
+    <insert id="addUser" parameterType="com.hjh.entity.User">
+        insert into task(createtime,updatetime,name,num) values(#{createtime},#{updatetime},#{name},#{num})
+    </insert>
+    <delete id="deleteUser" >
+        delete from task where id=#{id}
+    </delete>
+    <update id="updateUser">
+                UPDATE task SET updatetime=#{updatetime},name=#{name},num=#{num} where id=#{id}
+    </update>
+    <select id="selectUser" resultType="com.hjh.entity.User">
+        select * from task where num=#{num}
+    </select>
+</mapper>

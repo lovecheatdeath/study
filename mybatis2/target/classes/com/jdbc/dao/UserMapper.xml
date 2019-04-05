@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--resultType 指定单条记录返回的类型-->
+
+<mapper namespace="com.jdbc.dao.UserMapper">
+    <select id="select" resultType="com.jdbc.entity.User">
+        SELECT * FROM task where id=#{id}
+    </select>
+    <select id="selectTwo" resultType="Map">
+                SELECT *  FROM task
+                <choose>
+                    <when test="num!=null">
+                        where num=#{num}
+                    </when>
+                    <when test="name!=null">
+                        where name=#{name}
+                    </when>
+                    <otherwise>
+                        where 1=2
+                    </otherwise>
+                </choose>
+    </select>
+    <insert id="add">
+               INSERT INTO task (createtime,updatetime,name,num)
+               value(#{createtime},#{updatetime},#{name},#{num})
+    </insert>
+    <update id="update">
+                UPDATE  task SET
+                updatetime=#{updatetime},name=#{name},num=#{num} where id=#{id}
+    </update>
+    <delete id="delete">
+                delete  from task WHERE id=#{id}
+    </delete>
+</mapper>
